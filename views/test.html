@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      
+    <script src="lib/leap.js"></script>
+    <script src="lib/convnet.js"></script>
+  </head>
+  <body onkeypress="key_pressed(event);">
+    <div class="row">
+      <div class="col s3 purple lighten-5" style="height: 100%">
+        <div class="section">
+        <h5>Some Data</h5>
+        <p>Framerate: <span id="leapFPS">FPS</span></p>
+        <p>Number of hands: <span id="handCount">Hands</span></p>
+        <p>Number of pointables: <span id="pointableCount">Pointables</span></p>
+        <p>Number of tools: <span id="toolCount">Tools</span></p>
+        <p>Number of fingers: <span id="fingerCount">Fingers</span></p>
+        <p>Number of gestures: <span id="gestureCount">Gestures</span></p>
+        </div>
+      </div>
+
+      <div class="col s9 grey lighten-2" style="height: 100%">
+        <canvas id="canvas" width="1000" height="800" style="border: 1px solid black"></canvas>
+        <canvas id="canvas2" width="1000" height="800" style="position: absolute; top: 0; bottom: 0; z: 0;border: 1px solid black"></canvas>        
+      </div>
+
+    </div>
+    
+    <script src="test.js">
+    </script>
+</body>

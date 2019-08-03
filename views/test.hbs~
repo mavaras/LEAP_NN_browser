@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+	
+    <script src="/lib/leap.js"></script>
+    <script src="/lib/convnet.js"></script>
+  </head>
+  <body onkeypress="key_pressed(event);">
+	<div class="ui segment" style="height: 100%">
+    <div class="ui grid">
+      <div class="ui segment four wide column" style="height: 100%">
+		<div class="ui two item menu">
+		  <a id="lm" class="item active">Leap Motion</a>
+		  <a id="mo" class="item">Mouse</a>
+		</div><br>
+		<div class="" id="leap_menu">
+			<div class="ui segment row">
+			<h3>Leap Data</h3>
+			<p>Framerate: <span id="leapFPS">FPS</span></p>
+			<p>Number of hands: <span id="handCount">Hands</span></p>
+			<p>Number of pointables: <span id="pointableCount">Pointables</span></p>
+			<p>Number of tools: <span id="toolCount">Tools</span></p>
+			<p>Number of fingers: <span id="fingerCount">Fingers</span></p>
+			<p>Number of gestures: <span id="gestureCount">Gestures</span></p>
+			</div>
+			  
+			<div class="ui success message">
+			  You can press <strong>F</strong> and start moving your hand,
+			  then press <strong>F</strong> again to finish the gesture
+			</div>
+		</div>
+
+		<div class="ui segment" id="mouse_menu" style="display:none">
+		</div>
+
+		<br><div class="ui divider"></div><br>
+
+		<div class="row" style="width:100%;display:inline-block">
+			<button class="ui button" onclick="clear_canvas()" style="width:45%;margin-left:10">clear canvas</button>
+			<button class="ui button" onclick="recognize_canvas()" style="width:45%">recognize</button>
+		</div>
+		<div class="row">
+		  results
+		</div>
+      </div>
+	  
+      <div class="twelve wide column" style="">
+        <canvas id="canvas" width="1000" height="800" style=""></canvas>
+        <canvas id="canvas2" width="1000" height="800" style="z-index:1;top:0;bottom:0;position:absolute"></canvas>
+      </div>
+    </div>
+	</div>
+    
+    <script src="test.js"></script>
+	<script>
+	  document.getElementById("mo").onclick = function() {
+	    document.getElementById("leap_menu").style.display = "none";
+  	    document.getElementById("mouse_menu").style.display = "block";
+        document.getElementById("mo").className = "item active";
+        document.getElementById("lm").className += "item";
+	  }
+	  document.getElementById("lm").onclick = function() {
+	    document.getElementById("leap_menu").style.display = "block";
+  	    document.getElementById("mouse_menu").style.display = "none";
+        document.getElementById("lm").className += "item active";
+        document.getElementById("mo").className += "item";
+	  }
+	  
+	  var canvas = document.getElementById("canvas");
+	  var ctx = canvas.getContext("2d");
+ 	  var canvas2 = document.getElementById("canvas2");
+	  var ctx2 = canvas2.getContext("2d");
+	  
+	  function recognize_canvas() {
+		$.post("/", { canvas: canvas2.toDataURL() }, function (data) {
+			// console.log(data);
+		}).done(function () {
+		});
+	  }
+
+	  function clear_canvas() {
+	    ctx.clearRect(0, 0, canvas.width, canvas.height);
+	    ctx2.clearRect(0, 0, canvas.width, canvas.height);
+	  }
+	</script>
+</body>
