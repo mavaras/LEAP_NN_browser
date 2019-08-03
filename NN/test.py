@@ -8,18 +8,6 @@ from sklearn.externals import joblib
 PATH = "mlp_model.pkl"
 
 
-def process_image(img):
-	img = cv2.dilate(img, np.ones((3, 3), np.uint8), iterations=1)
-	print(img)
-	crop_x, crop_y = [0,0], [0,0]
-	min_x, min_y, max_x, max_y = 0
-	H, W = img.shape[:2]
-	for c in H:
-		for j in W:
-			if img[c][j] != 0:
-				min_x = j
-				break
-
 def neural_network(img):
     # setting + normalizing image
 	img = cv2.resize(img, (28, 28))
@@ -34,12 +22,8 @@ def neural_network(img):
 	n_samples = len(digits.images)
 	data = digits.images.reshape((n_samples, -1))
 
-	# setting classifier
-	"""clf = svm.SVC(gamma=0.0001, C=100)
-	clf.fit(data[:n_samples], digits.target[:n_samples])"""
-
 	# predict
-	clf = joblib.load(PATH).best_estimator_
+	clf = joblib.load(sys.argv[2]).best_estimator_
 	predicted = clf.predict(img.reshape((1, img.shape[0] * img.shape[1])))
 
 	# display results
@@ -47,7 +31,7 @@ def neural_network(img):
 
 
 if __name__ == "__main__":
-	img = cv2.imread("public/image.png", cv2.IMREAD_GRAYSCALE)
+	img = cv2.imread(sys.argv[1], cv2.IMREAD_GRAYSCALE)
 	H, W = img.shape[:2]
 	for c in range(H):
 		for j in range(W):
@@ -68,9 +52,8 @@ if __name__ == "__main__":
 			w = h
 		
 		cnt_area = cv2.contourArea(cnt);
-		# cv2.rectangle(img, (x, y), (x-50 + w+50, y-50 + h+50), (123, 4, 1), 2)
 		crop = img[y-20:y+h+20, x-20:x+w+20]
+		#cv2.imshow("img", crop)
 		neural_network(crop)
-		# cv2.imshow("img", crop)
 
-	# cv2.waitKey(0)
+	#cv2.waitKey(0)

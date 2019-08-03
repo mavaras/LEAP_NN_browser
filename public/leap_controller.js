@@ -12,6 +12,7 @@ net.makeLayers(layer_defs);
 var trainer = new convnetjs.SGDTrainer(net, {method:'adadelta', batch_size:20, l2_decay:0.001});
 console.log(trainer);
 */
+
 var canvas = document.getElementById("canvas");
 var canvas2 = document.getElementById("canvas2");
 var ctx = canvas.getContext("2d");
@@ -40,13 +41,6 @@ var controller = new Leap.Controller({
     frameEventName: "animationFrame"
 });
 controller.recording = false;
-
-class Point {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-}
 
 var gesture_points = new Array(5);  // stores the point when a new gesture is being done
 for (var c = 0; c < 5; c++) gesture_points[c] = [];

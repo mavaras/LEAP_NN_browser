@@ -39,13 +39,14 @@ app.post("/recognize", (req, res) => {
 	var buf = new Buffer(data, "base64");
 	fs.writeFile("public/image.png", buf);
 
-	ps.PythonShell.run("test.py", null, function(err, result) {
+	ps.PythonShell.run("NN/test.py", {args: ["public/image.png", "NN/mlp_model.pkl"]},
+					   function(err, result) {
 		if (err) throw err;
 		console.log(result);
 		res.end(result[0]);
 	});
 });
 
-app.listen(3000, () => {
+app.listen(5000, () => {
     console.log("server on");
 });

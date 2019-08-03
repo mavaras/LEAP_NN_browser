@@ -10,8 +10,11 @@
 	
     <script src="/lib/leap.js"></script>
     <script src="/lib/convnet.js"></script>
+
+	<script src="canvas_controller.js"></script>
+    <script src="point.js"></script>
   </head>
-  <body onkeypress="key_pressed(event);">
+  <body onkeypress="key_pressed(event);" onload="on_load_event()">
 	<div class="ui segment" style="height: 100%;margin:10; margin-bottom:60;border:none">
     <div class="ui grid">
       <div class="ui segment four wide column" style="height: 100%">
@@ -34,12 +37,13 @@
 			  You can press <strong>F</strong> and start moving your hand,
 			  then press <strong>F</strong> again to finish the gesture
 			</div>
-		</div><br>
-
-		<div class="ui segment" id="mouse_menu" style="display:none">
 		</div>
 
-		<br><div class="ui divider"></div><br>
+		<div class="ui segment" id="mouse_menu" style="display:none">
+			<p>You can draw numbers using your mouse</p>
+		</div>
+
+		<br><br><div class="ui divider"></div><br>
 
 		<div class="row" style="width:100%;display:inline-block">
 			<button class="ui button" onclick="clear_canvas()" style="width:45%;margin-left:10">clear canvas</button>
@@ -55,19 +59,32 @@
       </div>
 	  
       <div id="joder" class="twelve wide column">
-		<div class="row">
-        <canvas id="canvas" width="1000" height="680" style="top:-13;"></canvas>
-        <canvas id="canvas2" width="1000" height="680" style="position: absolute; top: 0; bottom: 0; z: 0;"></canvas>
+		<div class="row ui segment" style="top:-13;">
+        <canvas id="canvas" width="1000" height="675" style="top:-13;"></canvas>
+        <canvas id="canvas2" width="1000" height="675"
+							 style="position: absolute; top: 0; bottom: 0; z-index: 1;"
+	
+	 						 onmousedown = "mouse_down_event(event.clientX,
+															 event.clientY, 
+															 event.button)"
+							 onmousemove = "mouse_move_event(event.clientX, 
+															 event.clientY, 
+															 event.button)"
+							 onmouseup = "mouse_up_event(event.clientX, 
+														 event.clientY, 
+														 event.button)"
+							 oncontextmenu = "return false;">
+		</canvas>
 		</div>
 		
-		<div class="row right alignment">
-		<a href="github.com/mavaras"><i class="github icon big" style="color:black"></i></a>
+		<div class="row right alignment" style="margin-top:-10">
+		<a href="https://github.com/mavaras/Leap_NN_browser" target="blank"><i class="github icon large" style="color:black"></i></a>
 		</div>
       </div>
     </div>
 	</div>
     
-    <script src="test.js"></script>
+    <script src="leap_controller.js"></script>
 	<script>
 	document.getElementById("mo").onclick = function() {
 		document.getElementById("leap_menu").style.display = "none";
@@ -100,16 +117,12 @@
 				document.getElementById("result").innerHTML = "Matched with "+data;
 			}
 		});
-		/*$.post("/recognize", { canvas: canvas2.toDataURL() }, function (data) {
-			console.log("data"+data);
-		}).success(function (res) {
-			console.log(res);
-		});*/
 	}
 
 	function clear_canvas() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx2.clearRect(0, 0, canvas.width, canvas.height);
+		document.getElementById("result_message").style.display = "none";
 	}
 	</script>
 </body>
