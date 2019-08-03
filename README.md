@@ -22,7 +22,7 @@ google-chrome http://localhost:3000/
 
 ## Usage
 <p align="justify">
-You can use your mouse or the Leap Motion device. In the second case, you just have to plug the device to your computer and start drawing by pressing **F**, moving your hand, and pressing **F** again to finish the stroke.
+You can use your mouse or the Leap Motion device. In the second case, you just have to plug the device to your computer and start drawing by pressing <strong>F</strong>, moving your hand, and pressing <strong>F</strong> again to finish the stroke.
 </p>
 - mouse
 <p align="center">
