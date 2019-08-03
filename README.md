@@ -32,6 +32,7 @@ You can use your mouse or the Leap Motion device. In the second case, you just h
 <p align="center">
   <img width="607" height="350" src="https://raw.githubusercontent.com/mavaras/Leap_NN_browser/master/readme_files/leap.gif">
 </p>
+
 ## TODO
 - Pretty hand visualization :) (three.js maybe?)
 
