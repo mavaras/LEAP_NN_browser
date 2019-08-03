@@ -21,6 +21,17 @@ google-chrome http://localhost:3000/
 ```
 
 ## Usage
-
+<p align="justify">
+You can use your mouse or the Leap Motion device. In the second case, you just have to plug the device to your computer and start drawing by pressing **F**, moving your hand, and pressing **F** again to finish the stroke.
+</p>
+- mouse
+<p align="center">
+  <img width="607" height="350" src="https://raw.githubusercontent.com/mavaras/Leap_NN_browser/master/readme_files/mouse.gif">
+</p>
+- Leap
+<p align="center">
+  <img width="607" height="350" src="https://raw.githubusercontent.com/mavaras/Leap_NN_browser/master/readme_files/leap.gif">
+</p>
 ## TODO
 - Pretty hand visualization :) (three.js maybe?)
+
