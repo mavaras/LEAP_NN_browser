@@ -37,4 +37,5 @@ You can use your mouse or the Leap Motion device. In the second case, you just h
 
 ## TODO
 - Pretty hand visualization :) (three.js maybe?)
+- Try new datasets
 
