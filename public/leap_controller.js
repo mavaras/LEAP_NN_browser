@@ -84,11 +84,11 @@ function draw_circle(x, y, color, context, filled=false) {
     context.beginPath();
     context.arc(x, y, 8, 0, 2*Math.PI);
     context.strokeStyle = color;
-    context.stroke();
 	if (filled) {
 		context.fillStyle = color;
 		context.fill();
 	}
+    context.stroke();
 }
 
 function key_pressed(event) {
@@ -97,6 +97,7 @@ function key_pressed(event) {
         
         if (controller.recording) {
             for (var c = 0; c < gesture_points[1].length; c++) {
+				console.log(gesture_points[1][c].x+" "+gesture_points[1][c].y);
                 draw_circle(gesture_points[1][c].x, gesture_points[1][c].y, "green", ctx2, true);
             }
         }

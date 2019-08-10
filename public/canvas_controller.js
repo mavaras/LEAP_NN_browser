@@ -4,7 +4,7 @@ var canvas, ctx, points, canvas_rect, clicked;
 function on_load_event() {
 	clicked = false;
 	canvas = document.getElementById("canvas2");  // canvas2
-	ctx = canvas.getContext("2d");
+	ctx2 = canvas.getContext("2d");
 	points = new Array();
 	canvas_rect = get_canvas_rect(canvas);
 }
@@ -30,9 +30,9 @@ function mouse_down_event(x, y, button) {
 		
 		points.push(new Point(x, y));
 		console.log("begin point: "+points[points.length-1].x+", "+points[points.length-1].y);
-		ctx.strokeStyle = "green";
-		ctx.fillStyle = "green";
-		ctx.fillRect(x, y, 20, 20);
+		ctx2.strokeStyle = "green";
+		ctx2.fillStyle = "green";
+		ctx2.fillRect(x, y, 20, 20);
 	}
 } 
 
@@ -41,10 +41,10 @@ function mouse_move_event(x, y, button) {
 		x -= canvas_rect.x - get_scroll_X();
 		y -= canvas_rect.y - get_scroll_Y();
 		points.push(new Point(x, y));
-		ctx.beginPath();
-		ctx.arc(x, y, 10, 0, 2*Math.PI);
-		ctx.stroke();
-		ctx.fill();		
+		ctx2.beginPath();
+		ctx2.arc(x, y, 10, 0, 2*Math.PI);
+		ctx2.stroke();
+		ctx2.fill();		
 	}
 }
 
